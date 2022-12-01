@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1,target-densitydpi=high-dpi,user-scalable=yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="keywords" content="jQuery推箱子小游戏（100关且可扩展）,休闲,对战,娱乐,小游戏,下载即用,代码注释全（附源码）" />
+<meta name="description" content="jQuery推箱子小游戏（100关且可扩展）,休闲,对战,娱乐,小游戏,下载即用,代码注释全（附源码）" />
+<meta name="author" content="百年蜜蜂" />
+<meta name="Copyright" content="百年蜜蜂" />
+<meta name="renderer" content="webkit">
+<meta name="application-name" content="推箱子小游戏" />
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>推箱子小游戏</title>
+<link rel="stylesheet" href="./css/sokoban.css" />
+</head>
+<body>
+	<div id="main-layout" class="main-layout">
+		<div class="container">
+			<div class="content">
+				<div class="kk_level">
+					第
+					<span>0</span>
+					关
+				</div>
+				<div data-sokoban></div>
+				<div class="controll">
+					<div class="kk_time">
+						耗时:
+						<span>0</span>
+						秒
+					</div>
+					<div class="kk_step">
+						步数:
+						<span>0</span>
+						步
+					</div>
+					<button type="button" class="lv-btn" id="next">下一关</button>
+					<button type="button" class="lv-btn" id="prev">上一关</button>
+					<button type="button" class="lv-btn" id="start">开始游戏</button>
+					<button type="button" class="lv-btn" id="jump">选关卡</button>
+				</div>
+			</div>
+			<div class="opt-desc">
+				<br />
+				<fieldset class="layui-elem-field layui-field-title">
+					<legend>游戏说明</legend>
+				</fieldset>
+				<p>经典的推箱子是一个来自日本的古老游戏，目的是在训练你的逻辑思考能力。</p>
+				<p>在一个狭小的仓库中，要求把木箱放到指定的位置（如绿色点），稍不小心就会出现箱子无法移动或者通道被堵住的情况，所以需要巧妙的利用有限的空间和通道，合理安排移动的次序和位置，才能顺利的完成任务。</p>
+				<br />
+				<fieldset class="layui-elem-field layui-field-title">
+					<legend>玩法介绍</legend>
+				</fieldset>
+				<p>
+					<i class="layui-icon layui-icon-fire"></i>
+					轻按键盘的方向键（上下左右），控制熊猫方向推动箱子。
+				</p>
+				<p>
+					<i class="layui-icon layui-icon-fire"></i>
+					或者点击熊猫的上下左右行走，点击熊猫和箱子的下一个空间推动箱子。
+				</p>
+				<br />
+				<fieldset class="layui-elem-field layui-field-title">
+					<legend>源码下载</legend>
+				</fieldset>
+				<p>
+					©[原创]源码：
+					<a href="https://github.com/lvbee/Sokoban" target="_blank">Github仓库</a>
+					、
+					<a href="https://gitee.com/lvbee/Sokoban" target="_blank">Gitee仓库</a>
+					、
+					<a href="https://www.jq22.com/jquery-info24485" target="_blank">效果预览</a>
+				</p>
+				<br />
+			</div>
+		</div>
+	</div>
+</body>
+<script src="https://www.jq22.com/jquery/jquery-1.7.1.js"></script>
+
+<script type="text/javascript" src="./js/sokoban.level.js"></script>
+<script type="text/javascript" src="./js/sokoban.js"></script>
+<script type="text/javascript">
+	function layui_main() {
+		var $btn = $('#start');
+
+		var mySokoban = new Sokoban('.content', $btn, true);
+		mySokoban.restart();
+		$btn.click(function() {
+			mySokoban.restart();
+		});
+
+		$('#prev').click(mySokoban.prev);
+		$('#next').click(mySokoban.next);
+		$('#jump').click(function() {
+			var level = prompt("请输入1-100的关卡数：");
+			if (isNaN(level) || level<1 || level>100)
+				return mySokoban.msg('输入错误！');
+			mySokoban.jump(parseInt(level));
+		});
+	}
+
+	$(layui_main);
+</script>
+</html>

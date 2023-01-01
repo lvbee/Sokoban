@@ -319,8 +319,8 @@ function Sokoban(elem, btn, controll) {
 		var sRow = parseInt($space.attr('data-row'));
 		if (boxStateMap.hasOwnProperty(sRow))
 			$space.addClass('box2origin');
-		// 4.推动后要校验over
-		checkIsGameNext();
+		// 4.推动后要校验over（延迟判断，以示效果by2023年1月1日17:40:45）
+		setTimeout(checkIsGameNext, 100);
 		// 5.显示步数：
 		if ($controll && step < 1000) {
 			$controll.find('.kk_step>span').text(++step);
